@@ -1,19 +1,20 @@
 pipeline{
     agent any
-    stages {
+    //Global env section, it can be used by all stages
+    environment {
+        course = "Devops with ${pavan}"
+        name = "Pavan"
+    }
+    stages{
         stage ('Build'){
-           steps{
-              echo "**************Building the applicatation************"
-        }
-        }
-        stage('sonar'){
-            steps{
-                echo "***************Scanning the application************"
+            // this can be used by only this stage
+            environment {
+                cloud = 'GCP'
             }
-        }
-        stage('Docker'){
             steps{
-                echo "**********Building the docker image****************"
+                echo "Welcome ${name}"
+                echo "Thankyou for enrolling ${course}"
+                echo "You are certified in ${cloud}"
             }
         }
     }
