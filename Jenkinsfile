@@ -1,21 +1,16 @@
 pipeline{
     agent any
-    //Global env section, it can be used by all stages
-    environment {
-        course = "Devops with ${pavan}"
-        name = "Pavan"
+    environment{
+        DOCKER_CREDS = credentials('docker_creds')
+        DOCKER_REPO = 'pavandath510/solo-leveling'
+
     }
     stages{
-        stage ('Build'){
-            // this can be used by only this stage
-            environment {
-                cloud = 'GCP'
-            }
-            steps{
-                echo "Welcome ${name}"
-                echo "Thankyou for enrolling ${course}"
-                echo "You are certified in ${cloud}"
-            }
+        stage('Docker Push')
+        steps{
+            sh "docker tag -t sololeveling:v4 ${DOCKER_REPO}:v1"
+            sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
+            sh "docker push ${DOCKER_REPO}:v1"
         }
     }
 }
