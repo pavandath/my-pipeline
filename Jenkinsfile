@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-        DOCKER_CREDS = credentials('hub_creds')
+        DOCKER_CREDS = credentials('docker_token')
         DOCKER_REPO = 'pavandath510/solo-leveling'
 
     }
