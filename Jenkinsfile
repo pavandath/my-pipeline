@@ -1,9 +1,10 @@
 pipeline{
     agent any
     stages {
-        stage {'Build'} 
+        stage ('Build'){
            steps{
               echo "**************Building the applicatation************"
+        }
         }
         stage('sonar'){
             steps{
