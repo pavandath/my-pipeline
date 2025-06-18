@@ -7,7 +7,7 @@ pipeline{
             }
         }
         stage('parlledstages'){
-            parlled{
+            parllel{
                 stage('CodeAnalysis'){
                     steps{
                         echo "Running Code analysis"
