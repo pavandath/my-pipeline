@@ -1,16 +1,16 @@
+//when condition (it executes whenever a condition is matched)
 pipeline{
     agent any
     environment{
-        DOCKER_CREDS = credentials('docker_token')
-        DOCKER_REPO = 'pavandath510/solo-leveling'
-
+        DEPLOY_TO = 'production'
     }
     stages{
-        stage('Docker Push') {
+        stage('ProdDeploy'){
+            when {
+                environment name: 'DEPLOY_TO', value: 'production'   //when name is DEPLOY_TO and it's value matched to production steps will execute
+            }
         steps{
-            sh "docker tag  sololeveling:v4 ${DOCKER_REPO}:v1"
-            sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
-            sh "docker push ${DOCKER_REPO}:v1"
+            echo "Deploying to production"
         }
         }
     }
