@@ -38,7 +38,7 @@ pipeline{
             input {
                 message "Do you want to Deploy?"
                 ok "yes"
-                submitter 'pavan,dath'                  //only pavan & dath users can be able to submit
+                submitter 'dath'                  //only pavan & dath users can be able to submit
             }
             
             steps{
