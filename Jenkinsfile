@@ -4,6 +4,12 @@ pipeline{
         DEPLOY_TO = 'production'
     }
     stages{
+        stage ('DeploytoDev'){
+            steps{
+                echo "Deploying to dev environment"
+            }
+            }
+
         stage ('ProdDeploy'){
             when{
                 allOf{
