@@ -5,9 +5,10 @@ pipeline{
     }
     stages{
         stage('ProdDeploy'){
-            equals{
-                expected: "prod", actual: "DEPLOY_TO"
+            when {
+                equals expected: "prod", actual: "DEPLOY_TO"
             }
+            
         steps{
             echo "Deploying to production"
         }
