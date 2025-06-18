@@ -6,7 +6,7 @@ pipeline{
                 echo 'Building the page'
             }
         }
-        stage('parlledstages'){
+        stage('parllelstages'){
             parllel{
                 stage('CodeAnalysis'){
                     steps{
