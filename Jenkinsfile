@@ -40,7 +40,7 @@ pipeline{
                 //v1.2 is correct
                 //v.1.2 is incorrect
         
-                tag pattern: "v1\\d{1,2}.\\d{1,2}.\\d{1,2}", comparator: "REGEXP"
+                tag pattern: "v(1|2)\\.\\d+\\.\\d+", comparator: "REGEXP"
             }
             steps{
                 echo "Deploying to Production Environment"
