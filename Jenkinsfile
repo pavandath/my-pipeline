@@ -1,25 +1,25 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage ('Build'){
-            steps{
+    stages {
+        stage ('Build') {
+            steps {
                 echo 'Building the page'
             }
         }
-        stage('parllelstages'){
-            parllel{
-                stage('CodeAnalysis'){
-                    steps{
-                        echo "Running Code analysis"
+        stage('ParallelStages') {
+            parallel {
+                stage('CodeAnalysis') {
+                    steps {
+                        echo "Running Code Analysis"
                     }
                 }
-                stage('SecuirtyScan'){
-                    steps{
+                stage('SecurityScan') {
+                    steps {
                         echo "Running Security Scan"
                     }
                 }
-                stage('PerformanceTest'){
-                    steps{
+                stage('PerformanceTest') {
+                    steps {
                         echo "Running Performance Test"
                     }
                 }
