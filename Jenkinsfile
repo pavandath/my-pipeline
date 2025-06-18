@@ -1,21 +1,19 @@
 pipeline{
-    agent any 
+    agent any
+    environment{
+        DEPLOY_TO = 'production'
+    }
     stages{
-        stage ('DeploytoDev'){
-            steps{
-                echo "Deploying to dev environment"
-            }
-            }
-        stage ('DeploytoProd') {
+        stage ('ProdDeploy'){
             when{
-                //branch expression
-            expression {BRANCH_NAME ==~ /(production|staging)/}     // ==~ matches regular expression if the left  expr matches right
-            }                                                       // if the branch is either one from both it will run
+                allOf{
+                    branch 'production'
+                    expression name: 'DEPLOY_TO', value: 'production'
+                }
             steps{
-                echo "Deploying to Production"
+                echo "Deploying to production"
             }
-            
-        
+            }
         }
     }
 }
