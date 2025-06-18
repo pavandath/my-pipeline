@@ -5,6 +5,7 @@ pipeline{
             steps{
                 echo "Deploying to dev environment"
             }
+            }
         stage ('DeploytoProd') {
             when{
                 //branch expression
@@ -14,7 +15,7 @@ pipeline{
                 echo "Deploying to Production"
             }
             
-        }
+        
         }
     }
 }
