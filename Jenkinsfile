@@ -10,10 +10,11 @@ pipeline{
                     branch 'production'
                     expression name: 'DEPLOY_TO', value: 'production'
                 }
+            }
             steps{
                 echo "Deploying to production"
             }
             }
         }
-    }
+    
 }
