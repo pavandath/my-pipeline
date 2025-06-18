@@ -1,29 +1,49 @@
-//The post section defines one or more additional steps that are run upon the completion of a Pipeline’s or stage’s run
-//https://www.jenkins.io/doc/book/pipeline/syntax/#post
-// you can also run post at stage level or completion of stages
-
 pipeline{
     agent any
     stages{
         stage ('Build'){
             steps{
-                echo "Building the application"
+                echo "Building the project"
             }
         }
-    }
-    post {
-        //Only run this, when the current pipeline or a specific stage has a success
-        success{
-            echo "post=========================> success is triggered"
+        stage('CodeAnalysis'){
+            steps{
+                echo "Running Code Analysis"
+            }
         }
-        //Only run this, when the current pipeline or a specific stage has a failure
-        failure{
-              echo "post=========================> failureis triggered"
+        stage('DockerBuildNdPush'){
+            steps{
+                echo "Building and Pushing the image"
+            }
         }
-        //run irrespective success or failure
-        always{
-            echo "post=========================> always is triggered"
+        stage('DeployToDev'){
+            steps{
+                echo "Deploying to Dev Environment"
+            }
         }
-        
+        stage('DeployToTest'){
+            steps{
+                echo "Deploying to Test Environment"
+            }
+        }
+        stage('DeployToStage'){
+            steps{
+                echo "Depoloying to Stage Environment"
+            }
+        }
+        stage('DeployToProd'){
+            options{
+                timeout(time:300, unit:'SECONDS')
+            }
+            input {
+                message "Do you want to Deploy?"
+                ok "yes"
+                submitter 'pavan,dath'                  //only pavan & dath users can be able to submit
+            }
+            
+            steps{
+                echo "Deploying to Production Environment"
+            }
+        }
     }
 }
