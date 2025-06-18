@@ -6,7 +6,9 @@ pipeline{
     stages{
         stage('ProdDeploy'){
             when {
-                equals expected: "prod", actual: "DEPLOY_TO"
+                not{
+                    equals expected: "prod", actual: "DEPLOY_TO"
+                }
             }
             
         steps{
