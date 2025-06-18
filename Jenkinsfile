@@ -12,9 +12,9 @@ pipeline{
 
         stage ('ProdDeploy'){
             when{
-                allOf{
+                anyOf{
                     branch 'production'
-                    environment name: 'DEPLOY_TO', value: 'production'
+                    environment name: 'DEPLOY_TO', value: 'productionenv'
                 }
             }
             steps{
