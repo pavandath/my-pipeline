@@ -2,31 +2,31 @@ pipeline{
     agent any
     parameters{
         choice(name: 'BuildOnly',
-        choices: 'No/nYes',
+        choices: 'no/nyes',
         description: 'This will only build the application'
         )
         choice(name: 'ScanOnly',
-        choices: 'No/nYes',
+        choices: 'no/nyes',
         description: "This will Scan the Code"
         )
         choice(name: 'dockerPush',
-        choices: 'No/nYes',
+        choices: 'no/nyes',
         description: "This will build and push to docker repo"
         )
         choice(name:'deployToDev',
-        choices: 'No/nYes',
+        choices: 'no/nyes',
         description: 'This will deploy the app to Dev env'
         )
         choice(name:'deployToTest',
-        choices: 'No/nYes',
+        choices: 'no/nyes',
         description: 'This will deploy the app to Test env'
         )
         choice(name:'deployToStage',
-        choices: 'No/nYes',
+        choices: 'no/nyes',
         description: 'This will deploy the app to Stage env'
         )
         choice(name:'deployToProd',
-        choices: 'No/nYes',
+        choices: 'no/nyes',
         description: 'This will deploy the app to Prod env'
         )
     }
@@ -34,7 +34,7 @@ pipeline{
         stage ('Build'){
             when{
                 expression {
-                    params.BuildOnly =='Yes'
+                    params.BuildOnly =='yes'
                 }
             }
             steps{
@@ -44,7 +44,7 @@ pipeline{
         stage('CodeAnalysis'){
             when {
                 expression{
-                    params.ScanOnly == 'Yes'
+                    params.ScanOnly == 'yes'
                 }
             }
             steps{
@@ -54,7 +54,7 @@ pipeline{
         stage('DockerBuildNdPush'){
             when{
                 expression{
-                    params.dockerPush == 'Yes'
+                    params.dockerPush == 'yes'
                 }
             }
             steps{
@@ -64,7 +64,7 @@ pipeline{
         stage('DeployToDev'){
             when{
                 expression{
-                    params.deployToDev == 'Yes'
+                    params.deployToDev == 'yes'
                 }
             }
             steps{
@@ -74,7 +74,7 @@ pipeline{
         stage('DeployToTest'){
             when{
                 expression{
-                    params.deployToTest == 'Yes'
+                    params.deployToTest == 'yes'
                 }
             }
             steps{
@@ -84,7 +84,7 @@ pipeline{
         stage('DeployToStage'){
             when{
                 expression{
-                    params.deployToStage == 'Yes'
+                    params.deployToStage == 'yes'
                 }
             }
             steps{
@@ -96,7 +96,7 @@ pipeline{
                 allOf{
                     anyOf{
                         expression{
-                    params.deployToProd == 'Yes'
+                    params.deployToProd == 'yes'
                     }
                  }
                  anyOf{
