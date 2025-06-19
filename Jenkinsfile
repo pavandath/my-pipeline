@@ -1,15 +1,22 @@
 pipeline{
     agent any
     stages{
-        stage ('Build'){
+        stage('Build') {
             steps{
-            echo "Building the project"
+                echo 'Buildng the Application'
             }
         }
     }
     post{
-        success{
-            mail bcc: '', body: 'Build is success you can deploy now', cc: '', from: '',replyTo:'',subject: 'Jenkins Job status', to: 'pbachala@softility.com'
+        always{
+            script{
+                def subject = "Job Status is: ${currentBuild.currentResult}"
+                def body = "Build number is: ${currentBuild.number}\n" + "status is ${currentBuild.currentResult}" + "Job Url is: ${env.BUILD_URL}"
+                mail to:'pbachala@softility.com',
+                    subject: subject,
+                    body: body
+                
+            }
         }
     }
 }
